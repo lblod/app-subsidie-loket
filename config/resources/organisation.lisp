@@ -4,6 +4,9 @@
 ;; hence this is a temporary workaround
 ;; ORDER REALLY MATTERS FOR NOW!
 
+;; TODO: update classification from besluit to org? this is how it is in the domain.json of verenigingen-loket
+  ;; :has-one `((classification :via ,(s-prefix "org:classification") :as "administrative-unit-classification-code"))
+
 ;;"RESHUFFLED" from slave-besluit.lisp
 (define-resource bestuurseenheid () ;; Subclass of m8g:PublicOrganisation, which is a subclass of dct:Agent
   :class (s-prefix "besluit:Bestuurseenheid")
