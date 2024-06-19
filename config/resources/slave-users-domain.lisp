@@ -7,8 +7,8 @@
   :has-many `((account :via ,(s-prefix "foaf:account")
                        :as "account")
               (bestuurseenheid :via ,(s-prefix "foaf:member")
-                              :as "bestuurseenheden")
-             )
+                              :as "bestuurseenheden"))
+  :features `(include-uri)
   :on-path "gebruikers"
 )
 
