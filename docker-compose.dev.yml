@@ -1,35 +1,23 @@
 version: '3.7'
+
 services:
-  proxy:
-    image: nginx:1.13
-    volumes:
-      - ./config/proxy:/etc/nginx/conf.d
-    ports:
-      - "443:443"
-  mocklogin:
-    image: lblod/mock-login-service:0.5.0
   frontend:
     restart: "no"
-    environment:
-      EMBER_FEATURE_PUBLIC_SERVICES_ENABLED: "true"
-      EMBER_FEATURE_EREDIENSTEN_MANDATENBEHEER_ENABLED: "true"
-      EMBER_FEATURE_WORSHIP_MINISTER_MANAGEMENT_ENABLED: "true"
-      EMBER_WORSHIP_DECISIONS_DATABASE_URL: "https://dev.databankerediensten.lokaalbestuur.lblod.info"
-      EMBER_WORSHIP_ORGANISATIONS_DATABASE_URL: "https://dev.organisaties.lokaalbestuur.lblod.info"
   identifier:
-    ports:
-      - "90:80"
     restart: "no"
   dispatcher:
+    restart: "no"
+  mocklogin:
+    image: lblod/mock-login-service:0.5.0
+    restart: "no"
+  deltanotifier:
     restart: "no"
   database:
     restart: "no"
   virtuoso:
+    restart: "no"
     ports:
       - "8890:8890"
-    restart: "no"
-  deltanotifier:
-    restart: "no"
   migrations:
     restart: "no"
   cache:
@@ -40,23 +28,15 @@ services:
     restart: "no"
   file:
     restart: "no"
-  dbcleanup:
-    restart: "no"
   deliver-email-service:
     restart: "no"
   report-generation:
     restart: "no"
-  person-uri-for-social-security-number:
-    restart: "no"
-  sync-with-kalliope-error-notification:
-    restart: "no"
   subsidy-applications-management:
-    environment:
-      VERSIONED_CONFIGURATION_WATCHER: null
     restart: "no"
   case-number-generator:
     restart: "no"
-  subsidy-application-flow-management:
+  jobs-controller:
     restart: "no"
   publication-triplestore:
     restart: "no"
@@ -66,16 +46,11 @@ services:
     restart: "no"
   delta-producer-dump-file-publisher:
     restart: "no"
-  error-alert:
-    environment:
-      EMAIL_FROM: "Subsidiepunt Local <subsidiepunt-development@redpencil.io>"
-      EMAIL_TO: "subsidiepunt-development@redpencil.io"
+  delta-files-share:
     restart: "no"
-  update-bestuurseenheid-mock-login:
+  delta-producer-background-jobs-initiator-subsidies:
     restart: "no"
-  reasoner:
+  delta-producer-publication-graph-maintainer-subsidies:
     restart: "no"
-  op-public-consumer:
-    restart: "no"
-  sparql-authorization-wrapper:
+  subsidies-consumer:
     restart: "no"
